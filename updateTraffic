@@ -17,6 +17,7 @@ case $mode in
                 /config/scripts/wrtbwmon publish /tmp/usage.db /tmp/usage.htm /config/scripts/users.txt;
                 mkdir /var/www/htdocs/tests;
                 ln -s /tmp/usage.htm /var/www/htdocs/tests/usage.htm;
+        ;;
         *)
                 exit 0
         ;;
