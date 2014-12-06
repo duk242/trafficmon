@@ -1,0 +1,23 @@
+#!/bin/sh
+mode="$1"
+case $mode in
+        peak)
+                /config/scripts/wrtbwmon update /tmp/usage.db peak > /tmp/updateTrafficLog;
+                /config/scripts/wrtbwmon publish /tmp/usage.db /tmp/usage.htm /config/scripts/users.txt;
+                /config/scripts/wrtbwmon setup
+        ;;
+        offpeak)
+                /config/scripts/wrtbwmon update /tmp/usage.db offpeak;
+                /config/scripts/wrtbwmon publish /tmp/usage.db /tmp/usage.htm /config/scripts/users.txt;
+                /config/scripts/wrtbwmon setup
+        ;;
+        setup)
+                /config/scripts/wrtbwmon setup;
+                /config/scripts/wrtbwmon update /tmp/usage.db peak;
+                /config/scripts/wrtbwmon publish /tmp/usage.db /tmp/usage.htm /config/scripts/users.txt;
+                mkdir /var/www/htdocs/tests;
+                ln -s /tmp/usage.htm /var/www/htdocs/tests/usage.htm;
+        *)
+                exit 0
+        ;;
+esac
